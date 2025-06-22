@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>🔥 577 Music Player 🔥</title>
+<link rel="icon" href="https://emojicdn.elk.sh/🎶" />
+<style>
+  body {
+    background-color: #000;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin: 30px 0 10px;
+    color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc;
+    z-index: 2;
+  }
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding-bottom: 40px;
+    z-index: 2;
+  }
+
+  .player {
+    background: #121212cc;
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px #00ffcc55;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s;
+    z-index: 2;
+  }
+
+  .player:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px #00ffccaa;
+  }
+
+  .title {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #00ffcc;
+  }
+
+  audio {
+    display: none;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  button {
+    background: transparent;
+    border: 2px solid #00ffcc;
+    color: #00ffcc;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+  }
+
+  button:hover {
+    background: #00ffcc;
+    color: #121212;
+    box-shadow: 0 0 15px #00ffcc;
+  }
+
+  button:active {
+    transform: scale(0.95);
+  }
+
+  .time {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #00ffaa;
+    text-shadow: 0 0 5px #00ffaa;
+  }
+
+  footer {
+    margin-top: auto;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #555;
+    z-index: 2;
+  }
+
+  /* MUSIC NOTE ANIMATION */
+  .note {
+    position: absolute;
+    font-size: 24px;
+    color: #00ffcc88;
+    animation: floatNotes 10s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes floatNotes {
+    0% {
+      transform: translateY(100vh) translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-10vh) translateX(20px);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Animated notes -->
+  <div id="notes-container"></div>
+
+  <h1>🎶 577 Epic Music Player 🎶</h1>
+
+  <div class="container">
+    <div class="player">
+      <div class="title">waera - harinezumi [NCS Release]</div>
+      <audio id="audio1" src="https://raw.githubusercontent.com/Elijah5777/577Music/main/waera%20-%20harinezumi%20%5BNCS%20Release%5D.mp3"></audio>
+      <div class="controls">
+        <button onclick="playAudio('audio1')">Play ▶️</button>
+        <button onclick="pauseAudio('audio1')">Pause ⏸️</button>
+        <button onclick="restartAudio('audio1')">Restart 🔄</button>
+      </div>
+      <div class="time" id="time1">00:00 / 00:00</div>
+    </div>
+
+    <div class="player">
+      <div class="title">IDK lOl</div>
+      <audio id="audio2" src="https://raw.githubusercontent.com/Elijah5777/577Music/main/IDK%20lOl.mp3"></audio>
+      <div class="controls">
+        <button onclick="playAudio('audio2')">Play ▶️</button>
+        <button onclick="pauseAudio('audio2')">Pause ⏸️</button>
+        <button onclick="restartAudio('audio2')">Restart 🔄</button>
+      </div>
+      <div class="time" id="time2">00:00 / 00:00</div>
+    </div>
+  </div>
+
+  <footer>
+    577Music 🔥 All rights reserved
+  </footer>
+
+<script>
+  const audio1 = document.getElementById('audio1');
+  const audio2 = document.getElementById('audio2');
+
+  function playAudio(id) {
+    const audios = document.querySelectorAll('audio');
+    audios.forEach(a => {
+      if (a.id !== id) a.pause();
+    });
+    document.getElementById(id).play();
+  }
+
+  function pauseAudio(id) {
+    document.getElementById(id).pause();
+  }
+
+  function restartAudio(id) {
+    const audio = document.getElementById(id);
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  function formatTime(sec) {
+    const minutes = Math.floor(sec / 60);
+    const seconds = Math.floor(sec % 60);
+    return `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+  }
+
+  function updateTime(audio, timeElement) {
+    audio.ontimeupdate = () => {
+      const current = formatTime(audio.currentTime);
+      const duration = formatTime(audio.duration || 0);
+      timeElement.textContent = `${current} / ${duration}`;
+    };
+  }
+
+  updateTime(audio1, document.getElementById('time1'));
+  updateTime(audio2, document.getElementById('time2'));
+
+  // MUSIC NOTES GENERATOR
+  const notesContainer = document.getElementById('notes-container');
+  const notes = ['🎵','🎶','♪','♬'];
+
+  function createNote() {
+    const note = document.createElement('div');
+    note.classList.add('note');
+    note.style.left = Math.random() * 100 + 'vw';
+    note.style.fontSize = (Math.random() * 20 + 20) + 'px';
+    note.textContent = notes[Math.floor(Math.random() * notes.length)];
+    note.style.animationDuration = (8 + Math.random() * 5) + 's';
+    notesContainer.appendChild(note);
+
+    setTimeout(() => {
+      notesContainer.removeChild(note);
+    }, 13000);
+  }
+
+  setInterval(createNote, 800);
+</script>
+
+</body>
+</html>
