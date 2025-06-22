@@ -32,26 +32,24 @@
     letter-spacing: 1px;
   }
 
-  /* Hide the default audio player */
   audio {
     display: none;
   }
 
-  /* Custom Controls Container */
   .controls {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
   }
 
   button {
     background: transparent;
     border: 2px solid #00ffcc;
     color: #00ffcc;
-    padding: 12px 25px;
+    padding: 12px 40px;
     border-radius: 8px;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 1.1rem;
     cursor: pointer;
     transition: all 0.25s ease-in-out;
     user-select: none;
@@ -66,7 +64,6 @@
   button:active {
     transform: scale(0.95);
   }
-
 </style>
 </head>
 <body>
@@ -79,16 +76,11 @@
     <div class="controls">
       <button onclick="audio.play()">Play ▶️</button>
       <button onclick="audio.pause()">Pause ⏸️</button>
-      <button onclick="stopAudio()">Stop ⏹️</button>
     </div>
   </div>
 
 <script>
   const audio = document.getElementById('audio');
-  function stopAudio() {
-    audio.pause();
-    audio.currentTime = 0;
-  }
 </script>
 
 </body>
