@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hacker Hub - ESP32 Flasher</title>
+  <script type="module" src="https://unpkg.com/esp-web-tools@10.0.1/dist/web/install-button.js?module"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #00ff99;
+      font-family: monospace;
+      overflow: hidden;
+    }
+
+    .typewriter {
+      width: 28ch;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid #00ff99;
+      animation: typing 3s steps(28), blink .5s step-end infinite alternate;
+      font-size: 2em;
+      margin: 2em auto;
+      text-align: center;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 28ch }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .glow-button {
+      display: inline-block;
+      margin: 2em auto;
+      padding: 1em 2em;
+      color: #00ff99;
+      border: 2px solid #00ff99;
+      text-decoration: none;
+      transition: 0.3s;
+      background: transparent;
+      font-size: 1.2em;
+    }
+
+    .glow-button:hover {
+      box-shadow: 0 0 20px #00ff99;
+      background: rgba(0, 255, 153, 0.1);
+    }
+
+    esp-web-install-button {
+      display: block;
+      margin: 2em auto;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+  <div class="typewriter">Welcome to Hacker Hub_</div>
+
+  <esp-web-install-button manifest="manifest.json">
+    <button class="glow-button">Flash ESP32</button>
+  </esp-web-install-button>
+
+  <script>
+    // Matrix rain animation
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = "01";
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#00ff99";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
