@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>🔥 577 Music Player 🔥</title>
+<style>
+  body {
+    background-color: #0a0a0a;
+    color: #00ffcc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .player {
+    background: #121212;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px #00ffccaa;
+    text-align: center;
+    width: 350px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  audio {
+    display: none;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  button {
+    background: transparent;
+    border: 2px solid #00ffcc;
+    color: #00ffcc;
+    padding: 12px 40px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    user-select: none;
+  }
+
+  button:hover {
+    background: #00ffcc;
+    color: #121212;
+    box-shadow: 0 0 15px #00ffcc;
+  }
+
+  button:active {
+    transform: scale(0.95);
+  }
+</style>
+</head>
+<body>
+
+  <div class="player">
+    <h1>Now Playing:<br>waera - harinezumi [NCS Release]</h1>
+
+    <audio id="audio" src="https://raw.githubusercontent.com/Elijah5777/577Music/main/waera%20-%20harinezumi%20%5BNCS%20Release%5D.mp3"></audio>
+
+    <div class="controls">
+      <button onclick="audio.play()">Play ▶️</button>
+      <button onclick="audio.pause()">Pause ⏸️</button>
+    </div>
+  </div>
+
+<script>
+  const audio = document.getElementById('audio');
+</script>
+
+</body>
+</html>
