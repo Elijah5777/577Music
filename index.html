@@ -1,68 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>577 Music Player</title>
-  <style>
-    body {
-      background-color: #0f0f0f;
-      color: #00ffcc;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>🔥 577 Music Player 🔥</title>
+<style>
+  body {
+    background-color: #0a0a0a;
+    color: #00ffcc;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
 
-    .player {
-      background: #1a1a1a;
-      padding: 20px 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #00ffcc88;
-      text-align: center;
-    }
+  .player {
+    background: #121212;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px #00ffccaa;
+    text-align: center;
+    width: 350px;
+  }
 
-    .player h1 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-    }
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
 
-    audio {
-      width: 100%;
-      outline: none;
-    }
+  /* Hide the default audio player */
+  audio {
+    display: none;
+  }
 
-    button {
-      background: #00ffcc;
-      color: #0f0f0f;
-      border: none;
-      padding: 10px 20px;
-      margin: 10px 5px 0 5px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.2s;
-    }
+  /* Custom Controls Container */
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
 
-    button:hover {
-      background: #00c2a6;
-    }
-  </style>
+  button {
+    background: transparent;
+    border: 2px solid #00ffcc;
+    color: #00ffcc;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    user-select: none;
+  }
+
+  button:hover {
+    background: #00ffcc;
+    color: #121212;
+    box-shadow: 0 0 15px #00ffcc;
+  }
+
+  button:active {
+    transform: scale(0.95);
+  }
+
+</style>
 </head>
 <body>
+
   <div class="player">
-    <h1>Now Playing: waera - harinezumi [NCS Release]</h1>
-    <audio id="audio" controls>
-      <source src="https://raw.githubusercontent.com/Elijah5777/577Music/main/waera%20-%20harinezumi%20%5BNCS%20Release%5D.mp3" type="audio/mpeg" />
-      Your browser does not support the audio element 💀.
-    </audio>
-    <div>
-      <button onclick="document.getElementById('audio').play()">Play ▶️</button>
-      <button onclick="document.getElementById('audio').pause()">Pause ⏸️</button>
-      <button onclick="document.getElementById('audio').currentTime = 0; document.getElementById('audio').pause()">Stop ⏹️</button>
+    <h1>Now Playing:<br>waera - harinezumi [NCS Release]</h1>
+
+    <audio id="audio" src="https://raw.githubusercontent.com/Elijah5777/577Music/main/waera%20-%20harinezumi%20%5BNCS%20Release%5D.mp3"></audio>
+
+    <div class="controls">
+      <button onclick="audio.play()">Play ▶️</button>
+      <button onclick="audio.pause()">Pause ⏸️</button>
+      <button onclick="stopAudio()">Stop ⏹️</button>
     </div>
   </div>
+
+<script>
+  const audio = document.getElementById('audio');
+  function stopAudio() {
+    audio.pause();
+    audio.currentTime = 0;
+  }
+</script>
+
 </body>
 </html>
